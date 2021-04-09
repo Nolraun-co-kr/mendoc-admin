@@ -23,8 +23,18 @@ const UserDetail = () => {
         ]}
         footer={
           <Tabs defaultActiveKey="1">
-            <TabPane tab="프로젝트" key="1" />
-            <TabPane tab="결제내역" key="2" />
+            <TabPane tab="상태" key="1">
+              애완 / 수면시간 / 하루걸음수 / 기분
+            </TabPane>
+            <TabPane tab="기본정보" key="2">
+              기본 회원정보 폼
+            </TabPane>
+            <TabPane tab="일기" key="3">
+              작성 일기
+            </TabPane>
+            <TabPane tab="반복 일정" key="4">
+              반복 일정
+            </TabPane>
           </Tabs>
         }
       >

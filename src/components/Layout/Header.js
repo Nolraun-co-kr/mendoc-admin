@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
     <HeaderLayout>
-      <Link to={'/'} className="logo">놀라운소프트 관리자 사이트</Link>
+      <Link to={'/'} className="logo">멘독 관리자 사이트</Link>
       <MenuLayout theme="dark" mode="horizontal" selectedKeys={[depth1]}>
         <Item key="users">
           <Link to={'/users'}>회원관리</Link>

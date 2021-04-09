@@ -1,9 +1,5 @@
 import React from 'react';
-import Highlighter from 'react-highlight-words';
-import {Button, Input, Space, Table} from 'antd';
-import dayjs from 'dayjs';
-import {SearchOutlined} from "@ant-design/icons";
-import {Link} from "react-router-dom";
+import {Table} from 'antd';
 
 const ListTable = ({ data = [], loading = false, meta, onChangePagination, columns}) => {
   const rowSelection = {

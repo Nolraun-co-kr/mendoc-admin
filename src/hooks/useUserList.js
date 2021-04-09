@@ -2,7 +2,7 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {GetAllUser} from "../reducers/users/GetAllUser";
 import {useHistory} from "react-router";
-import {Button, Input, Space} from "antd";
+import {Button, Input, Space, Checkbox} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import dayjs from "dayjs";
@@ -123,6 +123,47 @@ export function useUserList () {
       ],
     },
     {
+      title: '연락처',
+      dataIndex: 'number',
+      width: 100,
+      ...getColumnSearchProps('number')
+    },
+    {
+      title: '닉네임',
+      dataIndex: 'nickname',
+      width: 130,
+      ...getColumnSearchProps('nickname')
+    },
+    {
+      title: '로그인 타입',
+      dataIndex: 'provider',
+      width: 150,
+    },
+    {
+      title: '멘독알림 수신',
+      dataIndex: 'receive_notification',
+      width: 110,
+      render: row => {
+        return (<Checkbox onChange={row} disabled={true} />)
+      },
+    },
+    {
+      title: '리듬알림 수신',
+      dataIndex: 'receive_rhythm',
+      width: 110,
+      render: row => {
+      return (<Checkbox onChange={row} disabled={true} />)
+      },
+    },
+    {
+      title: '방해알림 수신',
+      dataIndex: 'receive_disturbance',
+      width: 110,
+      render: row => {
+        return (<Checkbox onChange={row} disabled={true} />)
+      },
+    },
+    {
       title: '가입일',
       dataIndex: 'createdAt',
       width: 170,
@@ -131,6 +172,7 @@ export function useUserList () {
       },
       sorter: true,
     },
+
     {
       title: '',
       fixed: 'right',

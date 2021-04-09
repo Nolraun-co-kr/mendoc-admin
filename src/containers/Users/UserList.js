@@ -11,22 +11,22 @@ const UserList = () => {
       <Row gutter={16}>
         <Col span={6}>
           <Card>
-            <Statistic title="전체 회원수" value={meta?.totalItems} loading={loading} />
+            <Statistic title="전체 회원수" value={meta?.countAll} loading={loading} />
           </Card>
         </Col>
         <Col span={6}>
           <Card>
-            <Statistic title="전체 회원수" value={meta?.totalItems} loading={loading} />
+            <Statistic title="전체 회원수" value={meta?.countAll} loading={loading} />
           </Card>
         </Col>
         <Col span={6}>
           <Card>
-            <Statistic title="전체 회원수" value={meta?.totalItems} loading={loading} />
+            <Statistic title="전체 회원수" value={meta?.countAll} loading={loading} />
           </Card>
         </Col>
         <Col span={6}>
           <Card>
-            <Statistic title="전체 회원수" value={meta?.totalItems} loading={loading} />
+            <Statistic title="전체 회원수" value={meta?.countAll} loading={loading} />
           </Card>
         </Col>
       </Row>

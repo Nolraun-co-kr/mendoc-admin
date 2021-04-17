@@ -1,17 +1,26 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useCallback} from "react";
-import {PostLocalLogin} from "../reducers/auth/PostLocalLogin";
+import {useMutation} from "react-query";
+import {localLogin} from '../lib/api/auth/localLogin'
+import {saveItem} from '../lib/storage';
 
 export function useLogin() {
-  const dispatch = useDispatch();
-  const loading = useSelector(state => state.auth.loading);
+  const {mutate, error, isLoading} = useMutation(localLogin, {
+    onSuccess: ({data}) => {
+      console.log(data)
+      saveItem('access_token', data.access_token);
+      saveItem('refresh_token', data.refresh_token);
 
-  const onSubmit = useCallback(({email, password}) => {
-    dispatch(PostLocalLogin({ email, password }))
-  }, [])
+      window.location.reload()
+    }
+  })
+
+  const onFinish = (values) => {
+    mutate({
+      email: values.email,
+      password: values.password
+    })
+  };
 
   return {
-    loading,
-    onSubmit
+    onFinish, error, isLoading
   }
 }

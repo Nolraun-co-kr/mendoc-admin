@@ -18,7 +18,7 @@ export function useUserList () {
 
   useEffect(() => {
     const {location} = history;
-    dispatch(GetAllUser(location.search.split('?')[1]))
+
   }, [])
 
   const onClickColumnSearch = (selectedKeys, confirm, dataIndex) => {
@@ -49,6 +49,7 @@ export function useUserList () {
       qs += `&username=${username}`;
     }
     history.push(`?${qs}`)
+
 
     dispatch(GetAllUser(qs))
   }

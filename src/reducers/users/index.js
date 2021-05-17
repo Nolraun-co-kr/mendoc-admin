@@ -26,6 +26,7 @@ const slice = createSlice({
       const {meta, rows} = payload;
       state.users = rows;
       state.meta = meta;
+      console.log(payload);
       state.loading = false;
     },
     [GetAllUser.rejected]: (state, { payload }) => {

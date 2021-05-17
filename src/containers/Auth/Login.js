@@ -4,17 +4,12 @@ import styled from '@emotion/styled'
 import {useLogin} from "../../hooks/useLogin";
 
 const Login = () => {
-  const {onFinish, error, isLoading} = useLogin();
+  const {onFinish, contextHolder} = useLogin();
 
   return (
     <AsLayout>
       <FormBox>
         <h2>관리자 사이트 로그인</h2>
-        {
-          error && (
-            <Alert message={error.response.data.message} type="error" showIcon />
-          )
-        }
         <Form
           initialValues={{ remember: true }}
           onFinish={onFinish}
@@ -49,7 +44,7 @@ const Login = () => {
                 type="primary"
                 htmlType="submit"
                 className="login-form-button"
-                loading={isLoading}
+                loading={false}
                 style={{
                   height: '85px'
                 }}>
@@ -59,6 +54,8 @@ const Login = () => {
           </Layout>
         </Form>
       </FormBox>
+
+      {contextHolder}
     </AsLayout>
   );
 };

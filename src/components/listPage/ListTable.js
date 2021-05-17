@@ -26,9 +26,9 @@ const ListTable = ({ data = [], loading = false, meta, onChangePagination, colum
       rowKey={row => row.id}
       dataSource={data}
       pagination={{
-        current: meta?.currentPage,
-        pageSize: meta?.itemsPerPage,
-        total: meta?.totalItems
+        current: meta?.page,
+        pageSize: meta?.take,
+        total: meta?.search_count
       }}
       loading={loading}
       onChange={onChangePagination}

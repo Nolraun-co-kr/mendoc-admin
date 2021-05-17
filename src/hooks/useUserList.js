@@ -1,25 +1,25 @@
-import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {GetAllUser} from "../reducers/users/GetAllUser";
 import {useHistory} from "react-router";
 import {Button, Input, Space, Checkbox} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import dayjs from "dayjs";
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux';
+import {GetAllUser} from '../reducers/users/GetAllUser';
 
 
 export function useUserList () {
   const history = useHistory()
   const dispatch = useDispatch();
-  const {loading, users, meta} = useSelector(state => state.users, shallowEqual);
   const [searchFilter, setSearchFilter] = useState('');
   const [searchKeyword, setSearchKeyword] = useState('');
 
+  const {loading, users, meta} = useSelector(state => state.users);
+  
   useEffect(() => {
-    const {location} = history;
-
-  }, [])
+    dispatch(GetAllUser({ query: history.location.search }))
+  }, [history.location])
 
   const onClickColumnSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -34,24 +34,21 @@ export function useUserList () {
   }
 
   const handleChangePagination = (pagination, filters, sorter) => {
-    let qs = `limit=${pagination.pageSize}&page=${pagination.current}`;
+    let qs = `take=${pagination.pageSize}&page=${pagination.current}`;
     if(sorter.field && sorter.order ) {
-      qs += `&sortField=${sorter.field}&sortOrder=${sorter.order === 'descend' ? 'DESC' : "ASC"}`;
+      qs += `&sortField=${sorter.field}&sortOrder=${sorter.order === 'descend' ? 'desc' : "asc"}`;
     }
-    const {role, email, username} = filters;
+    const {role, email, name} = filters;
     if(role) {
       qs += `&role=${role}`;
     }
     if( email ) {
       qs += `&email=${email}`;
     }
-    if( username ) {
-      qs += `&username=${username}`;
+    if( name ) {
+      qs += `&name=${name}`;
     }
     history.push(`?${qs}`)
-
-
-    dispatch(GetAllUser(qs))
   }
 
   const getColumnSearchProps = dataIndex => ({
@@ -109,17 +106,17 @@ export function useUserList () {
     },
     {
       title: '이름',
-      dataIndex: 'username',
+      dataIndex: 'name',
       sorter: true,
-      ...getColumnSearchProps('username')
+      ...getColumnSearchProps('name')
     },
     {
       title: '권한',
       dataIndex: 'role',
       width: 100,
-      render: row => row === 'MEMBER' ? '일반회원' : '관리자',
+      render: row => row === 'USER' ? '일반회원' : '관리자',
       filters: [
-        { text: '일반회원', value: 'MEMBER' },
+        { text: '일반회원', value: 'USER' },
         { text: '관리자', value: 'ADMIN' },
       ],
     },
@@ -127,41 +124,37 @@ export function useUserList () {
       title: '연락처',
       dataIndex: 'number',
       width: 100,
+      length: 11,
       ...getColumnSearchProps('number')
     },
     {
       title: '닉네임',
-      dataIndex: 'nickname',
+      dataIndex: 'petName',
       width: 130,
-      ...getColumnSearchProps('nickname')
-    },
-    {
-      title: '로그인 타입',
-      dataIndex: 'provider',
-      width: 150,
+      ...getColumnSearchProps('petName')
     },
     {
       title: '멘독알림 수신',
-      dataIndex: 'receive_notification',
+      dataIndex: 'alrim_mendoc',
       width: 110,
       render: row => {
-        return (<Checkbox onChange={row} disabled={true} />)
+        return (<Checkbox defaultChecked={row} disabled={true} />)
       },
     },
     {
       title: '리듬알림 수신',
-      dataIndex: 'receive_rhythm',
+      dataIndex: 'alrim_rhythm',
       width: 110,
       render: row => {
-      return (<Checkbox onChange={row} disabled={true} />)
+      return (<Checkbox defaultChecked={row} disabled={true} />)
       },
     },
     {
       title: '방해알림 수신',
-      dataIndex: 'receive_disturbance',
+      dataIndex: 'alrim_Hindrance',
       width: 110,
       render: row => {
-        return (<Checkbox onChange={row} disabled={true} />)
+        return (<Checkbox defaultChecked={row} disabled={true} />)
       },
     },
     {
@@ -183,8 +176,8 @@ export function useUserList () {
   ];
 
   return {
-    loading,
     users,
+    loading,
     meta,
     handleChangePagination,
     columns

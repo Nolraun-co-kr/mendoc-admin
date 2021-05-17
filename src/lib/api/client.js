@@ -3,7 +3,7 @@ import axios from 'axios';
 const client = axios.create();
 
 client.defaults.baseURL =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:8080/api/v1' : 'http://54.180.144.82/api'
+  process.env.NODE_ENV === 'development' ? 'http://localhost:8080/api/v1' : 'http://mendoc-stage.ap-northeast-2.elasticbeanstalk.com/api'
 
 client.interceptors.request.use(
   async function (config) {

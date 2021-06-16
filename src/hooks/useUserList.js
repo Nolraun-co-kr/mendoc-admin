@@ -114,9 +114,9 @@ export function useUserList () {
       title: '권한',
       dataIndex: 'role',
       width: 100,
-      render: row => row === 'USER' ? '일반회원' : '관리자',
+      render: row => row === 'MEMBER' ? '일반회원' : '관리자',
       filters: [
-        { text: '일반회원', value: 'USER' },
+        { text: '일반회원', value: 'MEMBER' },
         { text: '관리자', value: 'ADMIN' },
       ],
     },
